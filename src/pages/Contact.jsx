@@ -35,13 +35,13 @@ export default function Contact() {
 
   const itemRow = {
     display: "flex",
-    alignItems: "center", // centered icon + text
+    alignItems: "center",
     gap: "12px",
     marginBottom: "20px"
   };
 
   const icon = {
-    fontSize: "18px", // smaller and aligned
+    fontSize: "18px",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -88,35 +88,87 @@ export default function Contact() {
 
   return (
     <>
-      <Navbar />
-      <div style={container}>
-        <div style={cardWrapper}>
-          <div>
-            <h1 style={sectionTitle}>Get in Touch</h1>
+      {/* MOBILE RESPONSIVE CSS */}
+      <style>{`
+        @media (max-width: 768px) {
+          .contact-card-wrapper {
+            grid-template-columns: 1fr !important;
+            padding: 20px !important;
+            gap: 20px !important;
+          }
 
-            <div style={itemRow}>
-              <div style={icon}>📞</div>
-            
+          .contact-title {
+            font-size: 24px !important;
+          }
+
+          .contact-right {
+            padding: 20px !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .contact-card-wrapper {
+            padding: 16px !important;
+          }
+
+          .contact-title {
+            font-size: 22px !important;
+          }
+
+          .contact-item-row {
+            gap: 8px !important;
+          }
+
+          .contact-icon {
+            width: 24px !important;
+            height: 24px !important;
+            font-size: 16px !important;
+          }
+
+          .contact-input {
+            padding: 12px !important;
+            font-size: 14px !important;
+          }
+
+          .contact-button {
+            padding: 14px !important;
+            font-size: 15px !important;
+          }
+        }
+      `}</style>
+
+      <Navbar />
+
+      <div style={container}>
+        <div className="contact-card-wrapper" style={cardWrapper}>
+
+          {/* LEFT SECTION */}
+          <div>
+            <h1 className="contact-title" style={sectionTitle}>Get in Touch</h1>
+
+            <div className="contact-item-row" style={itemRow}>
+              <div className="contact-icon" style={icon}>📞</div>
+              <div>
                 <h3 style={{ fontSize: "18px", fontWeight: 600 }}>Call Us</h3>
                 <p style={{ color: "#555" }}>+91 93245 67890</p>
               </div>
-           
+            </div>
 
-            <div style={itemRow}>
-              <div style={icon}>📧</div>
-              
+            <div className="contact-item-row" style={itemRow}>
+              <div className="contact-icon" style={icon}>📧</div>
+              <div>
                 <h3 style={{ fontSize: "18px", fontWeight: 600 }}>Email Us</h3>
                 <p style={{ color: "#555" }}>support@clientstore.com</p>
               </div>
-            
+            </div>
 
-            <div style={itemRow}>
-              <div style={icon}>📍</div>
-             
+            <div className="contact-item-row" style={itemRow}>
+              <div className="contact-icon" style={icon}>📍</div>
+              <div>
                 <h3 style={{ fontSize: "18px", fontWeight: 600 }}>Visit Us</h3>
                 <p style={{ color: "#555" }}>Tirupati, Andhra Pradesh, India</p>
               </div>
-           
+            </div>
 
             <hr style={{ margin: "24px 0" }} />
 
@@ -127,20 +179,27 @@ export default function Contact() {
             </div>
           </div>
 
-          <div style={rightBox}>
-            <h2 style={{ textAlign: "center", fontSize: "24px", fontWeight: 700, marginBottom: "20px" }}>
+          {/* RIGHT SECTION */}
+          <div className="contact-right" style={rightBox}>
+            <h2 style={{
+              textAlign: "center",
+              fontSize: "24px",
+              fontWeight: 700,
+              marginBottom: "20px"
+            }}>
               Send Your Message
             </h2>
 
             <form>
-              <input type="text" placeholder="Your Full Name" style={input} />
-              <input type="email" placeholder="Your Email Address" style={input} />
-              <textarea placeholder="Write your message..." style={textarea}></textarea>
-              <button type="submit" style={button}>✈️ Send Message</button>
+              <input type="text" placeholder="Your Full Name" className="contact-input" style={input} />
+              <input type="email" placeholder="Your Email Address" className="contact-input" style={input} />
+              <textarea placeholder="Write your message..." className="contact-input" style={textarea}></textarea>
+              <button type="submit" className="contact-button" style={button}>✈️ Send Message</button>
             </form>
           </div>
         </div>
       </div>
+
       <Footer />
     </>
   );
