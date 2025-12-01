@@ -1,8 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  // Detect screen resize and update isMobile
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const navContainer = {
     padding: "15px 20px",
@@ -29,7 +37,6 @@ export default function Navbar() {
     objectFit: "cover",
   };
 
-  // ----- Desktop Nav Links -----
   const navLinksDesktop = {
     display: "flex",
     gap: "40px",
@@ -44,7 +51,6 @@ export default function Navbar() {
     color: "#333",
   };
 
-  // ----- Right Icons -----
   const rightIcons = {
     display: "flex",
     alignItems: "center",
@@ -72,7 +78,6 @@ export default function Navbar() {
     borderRadius: "50%",
   };
 
-  // ----- Mobile Menu Styles -----
   const mobileMenu = {
     display: mobileOpen ? "flex" : "none",
     flexDirection: "column",
@@ -88,18 +93,14 @@ export default function Navbar() {
   };
 
   const hamburger = {
-    display: "none",
+    display: "block", // <-- FIXED: Now visible on mobile
     fontSize: "30px",
     cursor: "pointer",
   };
 
-  // ----- Responsive (Media Query using JS) -----
-  const isMobile = window.innerWidth <= 768;
-
   return (
     <>
       <header style={navContainer}>
-        {/* LEFT LOGO */}
         <div style={leftLogoSection}>
           <img src="/your-logo.png" alt="logo" style={logoImg} />
         </div>
@@ -117,7 +118,6 @@ export default function Navbar() {
           </nav>
         )}
 
-        {/* RIGHT ICONS */}
         <div style={rightIcons}>
           <span>👤</span>
 
