@@ -1,44 +1,52 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../components/navbar";
 import Footer from "../components/Footer";
 
 export default function About() {
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const container = {
     width: "100%",
     minHeight: "100vh",
     background: "#f5f5f5",
-    padding: "30px 20px",
-    boxSizing: "border-box",
+    padding: isMobile ? "20px 10px" : "30px 20px",
     display: "flex",
-    justifyContent: "center"
+    justifyContent: "center",
   };
 
   const card = {
     width: "100%",
     maxWidth: "1200px",
     background: "white",
-    padding: "40px",
+    padding: isMobile ? "20px" : "40px",
     borderRadius: "20px",
     boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
     display: "grid",
-    gridTemplateColumns: "1fr 1fr",
-    gap: "40px",
+    gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
+    gap: isMobile ? "20px" : "40px",
     alignItems: "center",
-    boxSizing: "border-box"
   };
 
   const title = {
-    fontSize: "32px",
+    fontSize: isMobile ? "24px" : "32px",
     fontWeight: "700",
     marginBottom: "20px",
-    color: "#111827"
+    color: "#111827",
   };
 
   const desc = {
-    fontSize: "16px",
+    fontSize: isMobile ? "14px" : "16px",
     color: "#4b5563",
     lineHeight: 1.7,
-    marginBottom: "20px"
+    marginBottom: "20px",
   };
 
   const bulletRow = {
@@ -46,34 +54,54 @@ export default function About() {
     alignItems: "center",
     gap: "10px",
     marginBottom: "10px",
-    fontSize: "16px",
-    color: "#111827"
+    fontSize: isMobile ? "14px" : "16px",
+    color: "#111827",
   };
 
   const icon = {
-    fontSize: "20px",
-    color: "#f97316"
+    fontSize: isMobile ? "18px" : "20px",
+    color: "#f97316",
   };
 
   const imageBox = {
     width: "100%",
     borderRadius: "20px",
     overflow: "hidden",
-    boxShadow: "0 4px 10px rgba(0,0,0,0.1)"
+    boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
   };
 
-  const imageStyle = {
-    width: "100%",
-    height: "100%",
-    objectFit: "cover"
+  const infoGrid = {
+    display: "grid",
+    gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)",
+    gap: isMobile ? "20px" : "30px",
+    marginBottom: "40px",
+  };
+
+  const infoCard = {
+    background: "white",
+    padding: isMobile ? "20px" : "30px",
+    borderRadius: "20px",
+    boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
+  };
+
+  const whyCard = {
+    background: "white",
+    padding: isMobile ? "20px" : "30px",
+    borderRadius: "20px",
+    boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
+    maxWidth: "1200px",
+    margin: "0 auto",
   };
 
   return (
     <>
       <Navbar />
+
+      {/* Main About Section */}
       <div style={container}>
         <div style={card}>
-          {/* Left Content */}
+
+          {/* LEFT */}
           <div>
             <h1 style={title}>About the Company</h1>
             <p style={desc}>
@@ -100,62 +128,60 @@ export default function About() {
             </div>
           </div>
 
-          {/* Right Image */}
+          {/* RIGHT */}
           <div style={imageBox}>
             <img
-              src="/images/company-logo.png" // Replace with your actual image
+              src="/images/company-logo.png"
               alt="Company"
-              style={imageStyle}
+              style={{ width: "100%", height: "100%", objectFit: "cover" }}
             />
           </div>
+
         </div>
       </div>
-            <div style={{ width: "100%", padding: "40px 20px", boxSizing: "border-box" }}>
-  {/* Mission / Vision / Core Values Section */}
-  <div style={{
-    display: "grid",
-    gridTemplateColumns: "repeat(3, 1fr)",
-    gap: "30px",
-    marginBottom: "40px"
-  }}>
 
-    {/* Mission */}
-    <div style={{ background: "white", padding: "30px", borderRadius: "20px", boxShadow: "0 4px 10px rgba(0,0,0,0.1)" }}>
-      <h2 style={{ fontSize: "20px", fontWeight: 700, marginBottom: "10px" }}>🟠 Our Mission</h2>
-      <p style={{ color: "#4b5563", lineHeight: 1.6 }}>
-        To deliver premium e-commerce solutions with scalable, fast, and clean UI/UX experiences.
-      </p>
-    </div>
+      {/* INFO GRID SECTION */}
+      <div style={{ width: "100%", padding: isMobile ? "20px 10px" : "40px 20px" }}>
 
-    {/* Vision */}
-    <div style={{ background: "white", padding: "30px", borderRadius: "20px", boxShadow: "0 4px 10px rgba(0,0,0,0.1)" }}>
-      <h2 style={{ fontSize: "20px", fontWeight: 700, marginBottom: "10px" }}>🧑‍🤝‍🧑 Our Vision</h2>
-      <p style={{ color: "#4b5563", lineHeight: 1.6 }}>
-        To build digital storefronts that transform businesses into trusted global brands.
-      </p>
-    </div>
+        <div style={infoGrid}>
 
-    {/* Core Values */}
-    <div style={{ background: "white", padding: "30px", borderRadius: "20px", boxShadow: "0 4px 10px rgba(0,0,0,0.1)" }}>
-      <h2 style={{ fontSize: "20px", fontWeight: 700, marginBottom: "10px" }}>🏅 Core Values</h2>
-      <ul style={{ color: "#4b5563", lineHeight: 1.8, paddingLeft: "20px" }}>
-        <li>Quality</li>
-        <li>Trust</li>
-        <li>Innovation</li>
-        <li>Customer First</li>
-      </ul>
-    </div>
-  </div>
+          <div style={infoCard}>
+            <h2 style={{ fontSize: "20px", fontWeight: 700, marginBottom: "10px" }}>🟠 Our Mission</h2>
+            <p style={{ color: "#4b5563", lineHeight: 1.6 }}>
+              To deliver premium e-commerce solutions with scalable, fast, and clean UI/UX experiences.
+            </p>
+          </div>
 
-  {/* Why Choose Us */}
-  <div style={{ background: "white", padding: "30px", borderRadius: "20px", boxShadow: "0 4px 10px rgba(0,0,0,0.1)", maxWidth: "1200px", margin: "0 auto" }}>
-    <h2 style={{ fontSize: "22px", fontWeight: 700, marginBottom: "10px" }}>🤝 Why Choose Us?</h2>
-    <p style={{ color: "#4b5563", lineHeight: 1.7 }}>
-      We specialize in building scalable MERN-based e-commerce frontends using clean, responsive, and component-driven architecture.
-      This ensures faster iteration, maintainable code, and API-ready UI for backend integration later.
-    </p>
-  </div>
-</div>
+          <div style={infoCard}>
+            <h2 style={{ fontSize: "20px", fontWeight: 700, marginBottom: "10px" }}>🧑‍🤝‍🧑 Our Vision</h2>
+            <p style={{ color: "#4b5563", lineHeight: 1.6 }}>
+              To build digital storefronts that transform businesses into trusted global brands.
+            </p>
+          </div>
+
+          <div style={infoCard}>
+            <h2 style={{ fontSize: "20px", fontWeight: 700, marginBottom: "10px" }}>🏅 Core Values</h2>
+            <ul style={{ color: "#4b5563", lineHeight: 1.8, paddingLeft: "20px" }}>
+              <li>Quality</li>
+              <li>Trust</li>
+              <li>Innovation</li>
+              <li>Customer First</li>
+            </ul>
+          </div>
+
+        </div>
+
+        {/* WHY CHOOSE US */}
+        <div style={whyCard}>
+          <h2 style={{ fontSize: isMobile ? "18px" : "22px", fontWeight: 700, marginBottom: "10px" }}>🤝 Why Choose Us?</h2>
+          <p style={{ color: "#4b5563", lineHeight: 1.7 }}>
+            We specialize in building scalable MERN-based e-commerce frontends using clean, responsive,
+            and component-driven architecture.
+          </p>
+        </div>
+
+      </div>
+
       <Footer />
     </>
   );
