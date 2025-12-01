@@ -120,6 +120,36 @@ export default function FeaturedProducts() {
         cursor: pointer;
       }
       .buy-btn:hover { background: #333; }
+      @media (max-width: 480px) {
+  .title {
+    font-size: 22px;
+    margin-left: 12px;
+  }
+
+  .carousel {
+    gap: 15px;
+    padding: 10px;
+  }
+
+  .product-card {
+    min-width: 200px;
+    padding: 12px;
+  }
+
+  .product-card img {
+    height: 180px;
+  }
+
+  .price {
+    font-size: 18px;
+  }
+
+  .buy-btn {
+    font-size: 14px;
+    padding: 8px;
+  }
+}
+
     `;
     document.head.appendChild(style);
 
