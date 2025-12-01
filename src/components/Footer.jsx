@@ -30,6 +30,7 @@ export default function Footer() {
 
       .footer-section {
         min-width: 180px;
+        flex: 1;
       }
 
       .footer-section h3 {
@@ -57,8 +58,9 @@ export default function Footer() {
 
       .social-icons {
         display: flex;
-        gap: 5px;
+        gap: 10px;
         margin-top: 10px;
+        flex-wrap: wrap;
       }
 
       .social-icons i {
@@ -80,12 +82,39 @@ export default function Footer() {
         color: #555;
       }
 
+      /* 🔥 MOBILE RESPONSIVE */
       @media (max-width: 768px) {
         .footer-container {
+          flex-direction: column;
           text-align: center;
+          gap: 30px;
+          padding: 40px 7%;
         }
+
+        .footer-section {
+          min-width: 100%;
+        }
+
+        .footer-text {
+          max-width: 100%;
+          margin: 0 auto;
+        }
+
         .social-icons {
           justify-content: center;
+        }
+      }
+
+      /* SMALL MOBILE - EXTRA SUPPORT */
+      @media (max-width: 480px) {
+        .footer-title {
+          font-size: 20px;
+        }
+        .footer-section h3 {
+          font-size: 17px;
+        }
+        .social-icons i {
+          font-size: 20px;
         }
       }
     `;
@@ -128,7 +157,7 @@ export default function Footer() {
           </ul>
         </div>
 
-        {/* Social Media */}
+        {/* Social */}
         <div className="footer-section">
           <h3>Follow Us</h3>
           <div className="social-icons">
